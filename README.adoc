@@ -1,0 +1,8 @@
+= Run it
+
+[source]
+----
+mvn compile tomee-embedded:run
+----
+
+then go on http://localhost:8080
