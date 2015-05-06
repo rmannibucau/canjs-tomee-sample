@@ -4,9 +4,6 @@
             'jquery': '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min',
             'text': '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.12/text.min',
             'can': '//cdn.rawgit.com/bitovi/canjs.com/v2.2.5/amd/can'
-        },
-        shims: {
-
         }
     });
 
