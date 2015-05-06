@@ -1,9 +1,14 @@
-$(function () {
-    (function (App) {
-        App.IssueListController = function () {
-            App.Issue.findAll({}, function (issues) {
+define([
+    'can', 'jquery',
+    'model',
+    'text!../partial/issue.mustache',
+    'text!../partial/issues.mustache'
+], function (can, $, model) {
+    return {
+        IssueListController: function () {
+            model.Issue.findAll({}, function (issues) {
                 can.view(
-                    'partial/issues.mustache',
+                    '../partial/issues.mustache',
                     new can.Map({
                         issues: new can.List(issues),
                         filterIssues: function (element) {
@@ -20,18 +25,17 @@ $(function () {
                         $('#content').html(html);
                     });
             });
-        };
-
-        App.IssueController = function (params) {
-            App.Issue.findById(params)
+        },
+        IssueController: function (params) {
+            model.Issue.findById(params)
                 .then(function (issue) {
                     can.view(
-                        'partial/issue.mustache',
+                        '../partial/issue.mustache',
                         issue,
                         function (html) {
                             $('#content').html(html);
                         })
                 });
-        };
-    })(App);
+        }
+    };
 });
