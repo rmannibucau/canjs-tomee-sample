@@ -2,7 +2,7 @@ Filter (hit ENTER): <input id="issuesFilter" can-enter="{ filterIssues @element 
 <ul id="issues">
     {{#issues}}
         <li style="display: {{ display }}">
-        <a href={{ url }}>{{ title }}</a> : {{ body }}
+        <a href="#!issue/{{ id }}">{{ title }}</a> : {{ body }}
     </li>
     {{/issues}}
 </ul>

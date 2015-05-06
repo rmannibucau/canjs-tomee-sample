@@ -12,6 +12,7 @@ import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 @Path("tomee")
 @ApplicationScoped
 @Startup // tomee feature but allows to preload the cache at bootstrap
+@Produces(MediaType.APPLICATION_JSON)
 public class TomEEResource {
     private Future<Collection<Issue>> cache;
 
@@ -32,11 +34,11 @@ public class TomEEResource {
                     .queryParam("state", "closed")
                     .request(MediaType.APPLICATION_JSON_TYPE)
                     .async()
-                    .get(new GenericType<Collection<Issue>>() {});
+                    .get(new GenericType<Collection<Issue>>() {
+                    });
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     public Collection<Issue> issues() {
         try {
             return cache.get();
@@ -46,5 +48,11 @@ public class TomEEResource {
             // no-op
         }
         return Collections.emptyList();
+    }
+
+    @GET
+    @Path("{id}")
+    public Issue issue(@PathParam("id") final long id) {
+        return issues().stream().filter(i -> i.getId() == id).findFirst().orElse(null);
     }
 }

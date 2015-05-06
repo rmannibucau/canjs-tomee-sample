@@ -21,5 +21,17 @@ $(function () {
                     });
             });
         };
+
+        App.IssueController = function (params) {
+            App.Issue.findById(params)
+                .then(function (issue) {
+                    can.view(
+                        'partial/issue.mustache',
+                        issue,
+                        function (html) {
+                            $('#content').html(html);
+                        })
+                });
+        };
     })(App);
 });

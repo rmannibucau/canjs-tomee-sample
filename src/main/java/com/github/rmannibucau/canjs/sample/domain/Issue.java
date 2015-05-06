@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class Issue {
+    private long id;
     private String title;
     private String body;
     private String url;
