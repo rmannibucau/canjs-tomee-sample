@@ -3,10 +3,10 @@ define([
     'model',
     'text!../partial/issue.mustache',
     'text!../partial/issues.mustache'
-], function (can, $, model) {
+], function (can, $, models) {
     return {
         IssueListController: function () {
-            model.Issue.findAll({}, function (issues) {
+            models.Issue.findAll({}, function (issues) {
                 can.view(
                     '../partial/issues.mustache',
                     new can.Map({
@@ -27,7 +27,7 @@ define([
             });
         },
         IssueController: function (params) {
-            model.Issue.findById(params)
+            models.Issue.findById(params)
                 .then(function (issue) {
                     can.view(
                         '../partial/issue.mustache',
